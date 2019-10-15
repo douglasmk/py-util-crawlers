@@ -14,7 +14,7 @@ class DeboniCambioCrawler(object):
 
     def __init__(self):
         options = Options()
-        chrome_bin = os.environ.get("GOOGLE_CHROME_BIN")
+        chrome_bin = os.environ.get("GOOGLE_CHROME_SHIM")
         options.binary_location = chrome_bin
 
         print(chrome_bin)
