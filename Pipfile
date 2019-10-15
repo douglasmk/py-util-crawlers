@@ -8,7 +8,7 @@ jupyter = "*"
 notebook = "*"
 selenium = "*"
 lxml = "*"
-python-dotenv = "*"
+dotenv = "*"
 
 [dev-packages]
 pylint = "*"
