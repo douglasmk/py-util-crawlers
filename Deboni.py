@@ -18,7 +18,7 @@ class DeboniCambioCrawler(object):
         if os.getenv("GOOGLE_CHROME_SHIM"):
             chrome_bin = os.getenv("GOOGLE_CHROME_SHIM")
         if chrome_bin:
-            options.add_argument('binary='+chrome_bin)
+            options.binary_location = chrome_bin
 
         options.add_argument('headless')
         options.add_argument('window-size=1920x1080')
