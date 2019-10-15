@@ -6,13 +6,14 @@ from selenium.common.exceptions import TimeoutException
 from dotenv import load_dotenv
 from pathlib import Path
 import os
+from selenium.webdriver.chrome.options import Options
 
 COTACAO_XPATH = '//*[@id="carrinho_valor_unit"]'
 
 class DeboniCambioCrawler(object):
 
     def __init__(self):
-        options = webdriver.ChromeOptions()
+        options = Options()
         chrome_bin=False
 
         if os.getenv("GOOGLE_CHROME_BIN"):
@@ -22,8 +23,10 @@ class DeboniCambioCrawler(object):
 
         print(chrome_bin)
 
-        options.add_argument('headless')
-        options.add_argument('window-size=1920x1080')
+        options.add_argument('--headless')
+        options.add_argument('--disable-gpu')
+        options.add_argument('--no-sandbox')
+        # options.add_argument('window-size=1920x1080')
         self.driver = webdriver.Chrome(executable_path=str(chrome_bin), chrome_options=options)
         self.items = []
         self.cotacao = []
