@@ -21,8 +21,9 @@ class DeboniCambioCrawler(object):
         options.add_argument('--headless')
         options.add_argument('--disable-gpu')
         options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
         # options.add_argument('window-size=1920x1080')
-        self.driver = webdriver.Chrome(executable_path=str(chrome_bin), chrome_options=options)
+        self.driver = webdriver.Chrome(str(chrome_bin), chrome_options=options)
         self.items = []
         self.cotacao = []
         self.url = "https://store.debonicambio.com.br/carrinho/widget/EUR/100"
