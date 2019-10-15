@@ -15,14 +15,16 @@ class DeboniCambioCrawler(object):
         options = webdriver.ChromeOptions()
         chrome_bin=False
 
-        if os.getenv("GOOGLE_CHROME_SHIM"):
-            chrome_bin = os.getenv("GOOGLE_CHROME_SHIM")
+        if os.getenv("GOOGLE_CHROME_BIN"):
+            chrome_bin = os.getenv("GOOGLE_CHROME_BIN")
         if chrome_bin:
             options.binary_location = chrome_bin
 
+        print(chrome_bin)
+
         options.add_argument('headless')
         options.add_argument('window-size=1920x1080')
-        self.driver = webdriver.Chrome(options=options)
+        self.driver = webdriver.Chrome(executable_path=str(chrome_bin), chrome_options=options)
         self.items = []
         self.cotacao = []
         self.url = "https://store.debonicambio.com.br/carrinho/widget/EUR/100"
