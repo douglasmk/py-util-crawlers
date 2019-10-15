@@ -16,7 +16,7 @@ class DeboniCambioCrawler(object):
         options = Options()
         chrome_bin = os.environ.get("GOOGLE_CHROME_SHIM")
         options.binary_location = chrome_bin
-        print(chrome_bin)
+        print(str(chrome_bin))
 
         options.add_argument('--headless')
         options.add_argument('--disable-gpu')
