@@ -20,4 +20,4 @@ txtEmail += 'Flex  '+flexCrawler.getCotacaoFormatada()+'  https://www.flexcambio
 txtEmail += '\n--------------------------------------------------------------\n'
 print(txtEmail)
 email = SendEmail()
-# email.send('Cotação Euro '+dt, txtEmail)
+email.send('Cotação Euro '+dt, txtEmail)
