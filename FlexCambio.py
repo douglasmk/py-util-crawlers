@@ -10,13 +10,16 @@ class FlexCambioCrawler(object):
     def crawl(self):
         http = urllib3.PoolManager()
         url = 'https://www.flexcambio.com.br/api/public/v1/moedas-order'
-        response = http.request('GET', url)
 
-        data = json.loads(response.data)
-        for item in data:
-            if (item['tipo'] == 'Moeda' and item['nome'] == 'EURO'):
-                self.cotacao = item['venda']
-                break
+        try:
+            response = http.request('GET', url)
+            data = json.loads(response.data)
+            for item in data:
+                if (item['tipo'] == 'Moeda' and item['nome'] == 'EURO'):
+                    self.cotacao = item['venda']
+                    break
+        except:
+            self.cotacao = 'ERRO'
 
 
     def getCotacao(self):
