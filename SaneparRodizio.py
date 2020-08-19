@@ -3,6 +3,7 @@ import urllib3
 import requests
 import time
 import datetime
+from pytz import timezone
 
 
 class SaneparRodizioCrawler(object):
@@ -18,7 +19,7 @@ class SaneparRodizioCrawler(object):
         try:
             data = requests.get(url).json()
             for item in data['relatedRecordGroups'][0]['relatedRecords']:
-                if timestampAtual < int(str(item['attributes']['INICIO'])[:10]) :
+                if timestampAtual < int(str(item['attributes']['NORMALIZACAO'])[:10]) :
                     rodizio = Rodizio()
                     rodizio.inicio = int(str(item['attributes']['INICIO'])[:10])
                     rodizio.retomada = int(str(item['attributes']['RETOMADA'])[:10])
@@ -31,16 +32,9 @@ class SaneparRodizioCrawler(object):
             print('ERRO')
             rodizio = Rodizio()
             rodizio.inicio = 'ERRO'
+            self.rodizios.append(rodizio)
+
         return self.rodizios
-
-
-    def getCotacao(self):
-        return self.cotacao
-
-    def getCotacaoFormatada(self):
-        cotacaoFormatada = self.cotacao.replace('.', ',')
-        cotacaoFormatada = 'R$ '+cotacaoFormatada[:4]
-        return cotacaoFormatada
 
 
 class Rodizio():
@@ -53,7 +47,7 @@ class Rodizio():
         self.periodo = ''
 
     def formatData(self, data):
-        return datetime.datetime.fromtimestamp(data).strftime("%d/%m/%Y %H:%M:%S")
+        return datetime.datetime.fromtimestamp(data).astimezone(timezone('America/Sao_Paulo')).strftime("%d/%m/%Y %H:%M:%S")
 
     def getInicio(self):
         return self.formatData(self.inicio)

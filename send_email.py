@@ -25,7 +25,9 @@ class SendEmail(object):
         # para diferentes formatos de mensagem
         # neste caso usaremos MIMEText para enviar
         # somente texto
-        message = MIMEText(texto)
+        header = '<html><body><pre style="font: monospace">'
+        footer = '</pre></body></html>'
+        message = MIMEText(header+texto+footer, 'html')
         message['subject'] = assunto
         message['from'] = from_addr
         message['to'] = ', '.join(to_addrs)
