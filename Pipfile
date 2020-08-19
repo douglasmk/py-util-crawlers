@@ -10,6 +10,9 @@ selenium = "*"
 lxml = "*"
 python-dotenv = "*"
 pytz="*"
+requests = "*"
+urllib3 = "*"
+bs4 = "*"
 
 [dev-packages]
 pylint = "*"
