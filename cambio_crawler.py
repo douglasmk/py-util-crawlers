@@ -12,7 +12,7 @@ flexCrawler = FlexCambioCrawler()
 flexCrawler.crawl()
 
 dt = datetime.datetime.now().astimezone(timezone('America/Sao_Paulo')).strftime("%d/%m/%Y %H:%M:%S")
-txtEmail = 'VALORES ATUALIZADOS EM '+dt
+txtEmail = 'VALORES ATUALIZADOS EM '+flexCrawler.getDataFormatada()
 # txtEmail += '\n--------------------------------------------------------------\n'
 # txtEmail += 'Deboni  '+deboniCrawler.getCotacaoFormatada()+'  https://debonicambio.com.br'
 txtEmail += '\n--------------------------------------------------------------\n'
