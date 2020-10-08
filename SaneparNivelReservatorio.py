@@ -5,6 +5,7 @@ class SaneparNivelReservatorioCrawler(object):
 
     def __init__(self):
         self.reservatorios = []
+        self.dataAtualizacao = ""
 
     def crawl(self):
         url = 'http://site.sanepar.com.br/'
@@ -14,16 +15,17 @@ class SaneparNivelReservatorioCrawler(object):
             soup_site = BeautifulSoup(site)
 
             blockNivel = soup_site.select("div.view-id-nivel_reservatorios > div")
-
+            self.dataAtualizacao = soup_site.select("div.view-id-nivel_reservatorios span.nivel-reserv-data")[0].text.strip()
             for blockItem in blockNivel :
-                titulo = blockItem.select('.views-field-title')[0].text.strip()
-                valor = blockItem.select('.views-field-body')[0].text.strip()
+                if blockItem.select('.views-field-title span'):
+                    titulo = blockItem.select('.views-field-title span')[0].text.strip()
+                    valor = blockItem.select('.views-field-body .field-content')[0].text.strip()
 
-                if titulo != 'Barragem Miringuava':
-                    reservatorio = Reservatorio()
-                    reservatorio.nome = titulo
-                    reservatorio.nivel = valor
-                    self.reservatorios.append(reservatorio)
+                    if titulo != 'Barragem Miringuava':
+                        reservatorio = Reservatorio()
+                        reservatorio.nome = titulo
+                        reservatorio.nivel = valor
+                        self.reservatorios.append(reservatorio)
         except:
             print('ERRO')
             reservatorio = Reservatorio()

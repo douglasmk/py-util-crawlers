@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from SaneparRodizio import SaneparRodizioCrawler
 from SaneparNivelReservatorio import SaneparNivelReservatorioCrawler
 from send_email import SendEmail
@@ -24,6 +25,8 @@ if len(niveis) > 0 :
     txtEmail += '\n\n ______________________________'
     txtEmail += '\n| NÍVEL DOS RESERVATÓRIOS '
     txtEmail += '\n ------------------------------'
+    txtEmail += '\n| '+saneparNivel.dataAtualizacao
+    txtEmail += '\n =============================='
 
     for nivel in niveis :
         txtEmail += '\n| '+nivel.getNome()+': '+nivel.getNivel()+' '
