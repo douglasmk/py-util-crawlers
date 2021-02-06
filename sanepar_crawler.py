@@ -22,7 +22,11 @@ try:
     for rodizio in rodizios :
         txtEmail += '| '+rodizio.getInicio()+' | '+rodizio.getRetomada()+' | '+rodizio.getNormalizacao()+' ('+rodizio.getPeriodo()+') | '+rodizio.getObservacao()
         txtEmail += '\n -----------------------------------------------------------------------------\n'
+except:
+    txtEmail += '|                   FALHA AO RECUPERAR A TABELA DE RODIZIOS                   |\n'
+    txtEmail += ' -----------------------------------------------------------------------------\n'
 
+try:
     if len(niveis) > 0 :
         txtEmail += '\n\n ______________________________'
         txtEmail += '\n| NÍVEL DOS RESERVATÓRIOS '
@@ -36,8 +40,7 @@ try:
 
         txtEmail += '\n *Sistema de Abastecimento de Água Integrado de Curitiba'
 except:
-    txtEmail += '|                   FALHA AO RECUPERAR A TABELA DE RODIZIOS                   |\n'
-    txtEmail += ' -----------------------------------------------------------------------------\n'
+    txtEmail += 'FALHA AO RECUPERAR DADOS DE NIVEIS DOS RESERVATÓRIOS\n'
 
 if len(rodizios) > 0 or len(niveis) > 0 :
     print(txtEmail)
