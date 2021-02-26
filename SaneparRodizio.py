@@ -14,7 +14,7 @@ class SaneparRodizioCrawler(object):
     def crawl(self):
         timestampAtual = int(time.strftime("%s", time.gmtime()))
         http = urllib3.PoolManager()
-        url = 'https://services1.arcgis.com/46Oage49MS2a3O6A/arcgis/rest/services/Mapa_Rodizio_Abastecimento_RMC_View/FeatureServer/1/queryRelatedRecords?f=json&definitionExpression=&relationshipId=1&returnGeometry=false&objectIds=147&outFields=*'
+        url = 'https://services1.arcgis.com/46Oage49MS2a3O6A/arcgis/rest/services/Mapa_Rodizio_Abastecimento_RMC_View/FeatureServer/1/queryRelatedRecords?f=json&definitionExpression=&relationshipId=1&returnGeometry=false&objectIds=283&outFields=*'
 
         try:
             data = requests.get(url).json()
