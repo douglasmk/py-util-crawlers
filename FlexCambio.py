@@ -22,17 +22,17 @@ class FlexCambioCrawler(object):
                     self.cotacao = item['venda']
                     self.data = item['updated_at']
                     break
-        except:
+        except Exception:
             self.cotacao = 'ERRO'
 
 
-    def getCotacao(self):
+    def get_cotacao(self):
         return self.cotacao
 
-    def getCotacaoFormatada(self):
-        cotacaoFormatada = self.cotacao.replace('.', ',')
-        cotacaoFormatada = 'R$ '+cotacaoFormatada[:4]
-        return cotacaoFormatada
+    def get_cotacao_formatada(self):
+        cotacao_formatada = self.cotacao.replace('.', ',')
+        cotacao_formatada = 'R$ '+cotacao_formatada[:4]
+        return cotacao_formatada
 
-    def getDataFormatada(self):
+    def get_data_formatada(self):
         return datetime.strftime(datetime.strptime(self.data, '%Y-%m-%d %H:%M:%S'), "%d/%m/%Y %H:%M:%S")

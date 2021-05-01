@@ -20,9 +20,9 @@ try:
     txtEmail += ' -----------------------------------------------------------------------------\n'
 
     for rodizio in rodizios :
-        txtEmail += '| '+rodizio.getInicio()+' | '+rodizio.getRetomada()+' | '+rodizio.getNormalizacao()+' ('+rodizio.getPeriodo()+') | '+rodizio.getObservacao()
+        txtEmail += '| '+rodizio.get_inicio()+' | '+rodizio.get_retomada()+' | '+rodizio.get_normalizacao()+' ('+rodizio.get_periodo()+') | '+rodizio.get_observacao()
         txtEmail += '\n -----------------------------------------------------------------------------\n'
-except:
+except Exception as e:
     txtEmail += '|                   FALHA AO RECUPERAR A TABELA DE RODIZIOS                   |\n'
     txtEmail += ' -----------------------------------------------------------------------------\n'
 
@@ -31,15 +31,15 @@ try:
         txtEmail += '\n\n ______________________________'
         txtEmail += '\n| NÍVEL DOS RESERVATÓRIOS '
         txtEmail += '\n ------------------------------'
-        txtEmail += '\n| '+saneparNivel.dataAtualizacao
+        txtEmail += '\n| '+saneparNivel.data_atualizacao
         txtEmail += '\n =============================='
 
         for nivel in niveis :
-            txtEmail += '\n| '+nivel.getNome()+': '+nivel.getNivel()+' '
+            txtEmail += '\n| '+nivel.get_nome()+': '+nivel.get_nivel()+' '
             txtEmail += '\n ------------------------------'
 
         txtEmail += '\n *Sistema de Abastecimento de Água Integrado de Curitiba'
-except:
+except Exception as e:
     txtEmail += 'FALHA AO RECUPERAR DADOS DE NIVEIS DOS RESERVATÓRIOS\n'
 
 if len(rodizios) > 0 or len(niveis) > 0 :

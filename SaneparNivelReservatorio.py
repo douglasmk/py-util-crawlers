@@ -5,28 +5,28 @@ class SaneparNivelReservatorioCrawler(object):
 
     def __init__(self):
         self.reservatorios = []
-        self.dataAtualizacao = ""
+        self.data_atualizacao = ""
 
     def crawl(self):
-        url = 'http://site.sanepar.com.br/'
+        url = 'https://site.sanepar.com.br/'
 
         try:
             site = urllib.request.urlopen(url).read()
             soup_site = BeautifulSoup(site)
 
-            blockNivel = soup_site.select("div.view-id-nivel_reservatorios > div")
-            self.dataAtualizacao = soup_site.select("div.view-id-nivel_reservatorios span.nivel-reserv-data")[0].text.strip()
-            for blockItem in blockNivel :
-                if blockItem.select('.views-field-title span'):
-                    titulo = blockItem.select('.views-field-title span')[0].text.strip()
-                    valor = blockItem.select('.views-field-body .field-content')[0].text.strip()
+            block_nivel = soup_site.select("div.view-id-nivel_reservatorios > div")
+            self.data_atualizacao = soup_site.select("div.view-id-nivel_reservatorios span.nivel-reserv-data")[0].text.strip()
+            for block_item in block_nivel :
+                if block_item.select('.views-field-title span'):
+                    titulo = block_item.select('.views-field-title span')[0].text.strip()
+                    valor = block_item.select('.views-field-body .field-content')[0].text.strip()
 
                     if titulo != 'Barragem Miringuava':
                         reservatorio = Reservatorio()
                         reservatorio.nome = titulo
                         reservatorio.nivel = valor
                         self.reservatorios.append(reservatorio)
-        except:
+        except Exception:
             print('ERRO')
             reservatorio = Reservatorio()
             reservatorio.nome = 'ERRO'
@@ -42,8 +42,8 @@ class Reservatorio():
         self.nome = ''
         self.nivel = ''
 
-    def getNome(self):
+    def get_nome(self):
         return self.nome
 
-    def getNivel(self):
+    def get_nivel(self):
         return self.nivel
