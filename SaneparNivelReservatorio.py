@@ -7,7 +7,7 @@ class SaneparNivelReservatorioCrawler(object):
         self.reservatorios = []
         self.data_atualizacao = ""
 
-    def crawl(self):
+    def crawl(self, as_dict:bool = False):
         url = 'https://site.sanepar.com.br/'
 
         try:
@@ -21,11 +21,11 @@ class SaneparNivelReservatorioCrawler(object):
                     titulo = block_item.select('.views-field-title span')[0].text.strip()
                     valor = block_item.select('.views-field-body .field-content')[0].text.strip()
 
-                    if titulo != 'Barragem Miringuava':
+                    if valor != 'Ver obra':
                         reservatorio = Reservatorio()
                         reservatorio.nome = titulo
                         reservatorio.nivel = valor
-                        self.reservatorios.append(reservatorio)
+                        self.reservatorios.append(reservatorio.as_dict() if as_dict else reservatorio)
         except Exception:
             print('ERRO')
             reservatorio = Reservatorio()
@@ -47,3 +47,15 @@ class Reservatorio():
 
     def get_nivel(self):
         return self.nivel
+
+    def as_dict(self):
+        return {
+            self.get_label('nome'): self.get_nome(),
+            self.get_label('nivel'): self.get_nivel(),
+        }
+
+    def get_label(self, attribute:str):
+        return ({
+            'nome': 'Reservatório',
+            'nivel': 'Nível',
+        }[attribute])

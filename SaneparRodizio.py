@@ -11,7 +11,7 @@ class SaneparRodizioCrawler(object):
     def __init__(self):
         self.rodizios = []
 
-    def crawl(self):
+    def crawl(self, as_dict:bool = False):
         timestamp_atual = int(time.strftime("%s", time.gmtime()))
         url = 'https://services1.arcgis.com/46Oage49MS2a3O6A/arcgis/rest/services/Mapa_Rodizio_Abastecimento_RMC_View/FeatureServer/1/queryRelatedRecords?f=json&definitionExpression=&relationshipId=1&returnGeometry=false&objectIds=283&outFields=*'
 
@@ -26,7 +26,7 @@ class SaneparRodizioCrawler(object):
                     rodizio.periodo = item['attributes']['PERIODO']
                     rodizio.observacao = item['attributes']['OBSERVACAO']
 
-                    self.rodizios.append(rodizio)
+                    self.rodizios.append(rodizio.as_dict() if as_dict else rodizio)
         except Exception:
             print('ERRO')
             rodizio = Rodizio()
@@ -62,3 +62,21 @@ class Rodizio():
 
     def get_observacao(self):
         return self.observacao
+
+    def as_dict(self):
+        return {
+            self.get_label('inicio'): self.get_inicio(),
+            self.get_label('retomada'): self.get_retomada(),
+            self.get_label('normalizacao'): self.get_normalizacao(),
+            self.get_label('periodo'): self.get_periodo(),
+            self.get_label('observacao'): self.get_observacao(),
+        }
+
+    def get_label(self, attribute:str):
+        return ({
+            'inicio': 'Início',
+            'retomada': 'Retomada',
+            'normalizacao': 'Normalização',
+            'periodo': 'Período',
+            'observacao': 'Observação',
+        }[attribute])
