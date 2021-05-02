@@ -4,15 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-jupyter = "*"
-notebook = "*"
-selenium = "*"
-lxml = "*"
 python-dotenv = "*"
 pytz="*"
 requests = "*"
 urllib3 = "*"
 bs4 = "*"
+sendgrid = "*"
 
 [dev-packages]
 pylint = "*"
