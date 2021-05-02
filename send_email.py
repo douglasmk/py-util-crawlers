@@ -13,7 +13,7 @@ class SendEmail(object):
         # https://github.com/sendgrid/sendgrid-python
         message = Mail(
             from_email=os.getenv('EMAIL_SENDER'),
-            to_emails=os.getenv("EMAIL_TO"),
+            to_emails=os.getenv('EMAIL_TO').split(';'),
             subject=assunto,
             html_content=texto)
         try:
